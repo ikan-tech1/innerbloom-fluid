@@ -1,0 +1,181 @@
+/* Floating glass toolbar + control-panel container. Auto-hides when idle. */
+
+.toolbar {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(0.75rem, 2vh, 1.5rem);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem;
+  border-radius: var(--radius);
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-border);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow:
+    0 10px 40px oklch(0% 0 0 / 0.45),
+    inset 0 1px 0 oklch(100% 0 0 / 0.06);
+  z-index: 10;
+  transition:
+    opacity var(--duration) var(--ease),
+    transform var(--duration) var(--ease);
+  max-width: calc(100vw - 1.5rem);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.toolbar.is-hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(0.6rem);
+  pointer-events: none;
+}
+
+.toolbar__divider {
+  width: 1px;
+  align-self: stretch;
+  margin: 0.2rem 0.15rem;
+  background: var(--ui-border);
+}
+
+.toolbar__swatches {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0 0.15rem;
+}
+
+.swatch {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    transform var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease);
+}
+
+.swatch:hover {
+  transform: scale(1.12);
+}
+
+.swatch:focus-visible {
+  outline: none;
+  border-color: var(--ui-fg);
+}
+
+.swatch[aria-pressed='true'] {
+  border-color: var(--ui-fg);
+  box-shadow: 0 0 0 3px oklch(100% 0 0 / 0.12);
+}
+
+.btn {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--ui-fg);
+  cursor: pointer;
+  transition:
+    background var(--duration) var(--ease),
+    color var(--duration) var(--ease),
+    transform var(--duration) var(--ease);
+}
+
+.btn:hover {
+  background: var(--ui-surface-hover);
+}
+
+.btn:active {
+  transform: scale(0.92);
+}
+
+.btn:focus-visible {
+  outline: none;
+  border-color: var(--ui-accent);
+  box-shadow: 0 0 0 3px oklch(72% 0.17 300 / 0.25);
+}
+
+.btn[aria-pressed='true'] {
+  background: var(--ui-accent);
+  color: oklch(12% 0.02 290);
+}
+
+.btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Tweakpane container placement + theming hook. */
+.controls {
+  position: fixed;
+  top: clamp(0.75rem, 2vh, 1.25rem);
+  right: clamp(0.75rem, 2vw, 1.25rem);
+  width: 280px;
+  max-width: calc(100vw - 1.5rem);
+  z-index: 10;
+  transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+}
+
+.controls.is-hidden {
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  pointer-events: none;
+}
+
+.hint {
+  position: fixed;
+  top: clamp(0.75rem, 2vh, 1.25rem);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--ui-muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  z-index: 9;
+  transition: opacity 600ms var(--ease);
+}
+
+.hint.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 540px) {
+  .btn {
+    width: 36px;
+    height: 36px;
+  }
+  .controls {
+    width: calc(100vw - 1.5rem);
+  }
+}

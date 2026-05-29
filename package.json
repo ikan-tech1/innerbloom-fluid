@@ -1,0 +1,27 @@
+{
+  "name": "innerbloom-fluid",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Interactive WebGL2 fluid simulation inspired by RÜFÜS DU SOL's Innerbloom",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "simplex-noise": "^4.0.3",
+    "tweakpane": "^4.0.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@tweakpane/core": "^2.0.5",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.9"
+  }
+}
